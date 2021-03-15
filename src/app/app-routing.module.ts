@@ -1,25 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponentComponent} from './home-component/home-component.component'
-import {CreateStudentComponent} from './create-student/create-student.component'
-import {ViewStudentComponent} from './view-student/view-student.component'
-const routes: Routes = [
-  {
-    path:'',
-    component: HomeComponentComponent
-  },
-  {
-  path: 'createStudent',
-    component: CreateStudentComponent,
-  },
-  {
-    path: 'viewStudent/:regno',
-      component: ViewStudentComponent,
-    }
-];
 
+const routes: Routes = [
+   {
+
+      path: '',
+      loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+   },
+
+   {
+     path: 'student',
+     loadChildren: () => import('./student/student.module').then(module => module.StudentModule)
+   }
+
+  
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+ // declarations:[LoginModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
